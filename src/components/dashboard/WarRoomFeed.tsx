@@ -19,7 +19,7 @@ export function WarRoomFeed({ data, isLoading }: WarRoomFeedProps) {
   const [selectedItem, setSelectedItem] = useState<FeedbackLog | null>(null);
 
   const filtered = data.filter((item) => {
-    const matchSearch = !search || 
+    const matchSearch = !search ||
       item.customer_name.toLowerCase().includes(search.toLowerCase()) ||
       item.raw_text.toLowerCase().includes(search.toLowerCase()) ||
       item.category.toLowerCase().includes(search.toLowerCase());
@@ -32,7 +32,7 @@ export function WarRoomFeed({ data, isLoading }: WarRoomFeedProps) {
       <div className="space-y-3">
         <div className="flex items-center gap-2">
           <Radio className="h-4 w-4 text-primary animate-pulse" />
-          <h2 className="text-sm font-semibold tracking-wide uppercase text-muted-foreground">Live Feed</h2>
+          <h2 className="text-xs font-semibold tracking-wide uppercase text-muted-foreground">Live Feed</h2>
           <span className="text-xs font-mono text-primary bg-primary/10 px-2 py-0.5 rounded-full">
             {filtered.length}
           </span>
@@ -45,11 +45,11 @@ export function WarRoomFeed({ data, isLoading }: WarRoomFeedProps) {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search feedback..."
-              className="pl-8 bg-secondary border-border/50 h-8 text-sm"
+              className="pl-8 h-8 text-sm"
             />
           </div>
           <Select value={statusFilter} onValueChange={setStatusFilter}>
-            <SelectTrigger className="w-[120px] bg-secondary border-border/50 h-8 text-sm">
+            <SelectTrigger className="w-[120px] h-8 text-sm">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -65,7 +65,7 @@ export function WarRoomFeed({ data, isLoading }: WarRoomFeedProps) {
           <div className="space-y-2 pr-2">
             {isLoading ? (
               Array.from({ length: 5 }).map((_, i) => (
-                <Skeleton key={i} className="h-24 w-full rounded-lg bg-secondary" />
+                <Skeleton key={i} className="h-24 w-full rounded-lg" />
               ))
             ) : filtered.length === 0 ? (
               <div className="text-center py-12 text-muted-foreground text-sm">

@@ -53,10 +53,7 @@ export function ManualEntryForm() {
     }
 
     setAnalyzing(true);
-
-    // Simulate AI processing delay
     await new Promise((r) => setTimeout(r, 1500));
-
     const analysis = mockAIAnalysis(text);
 
     insertFeedback.mutate(
@@ -73,9 +70,7 @@ export function ManualEntryForm() {
       {
         onSuccess: () => {
           toast.success("Feedback logged & analyzed");
-          setName("");
-          setEmail("");
-          setText("");
+          setName(""); setEmail(""); setText("");
           setAnalyzing(false);
         },
         onError: () => {
@@ -87,10 +82,10 @@ export function ManualEntryForm() {
   };
 
   return (
-    <Card className="glass-card border-border/30">
+    <Card className="shadow-sm">
       <CardHeader>
-        <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-          <Send className="h-4 w-4" />
+        <CardTitle className="text-xs font-medium text-muted-foreground flex items-center gap-2">
+          <Send className="h-3.5 w-3.5" />
           Manual Entry
         </CardTitle>
       </CardHeader>
@@ -98,18 +93,18 @@ export function ManualEntryForm() {
         <div className="grid grid-cols-2 gap-3">
           <div className="space-y-1">
             <Label className="text-xs text-muted-foreground">Name</Label>
-            <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Customer name" className="bg-secondary border-border/50 h-8 text-sm" />
+            <Input value={name} onChange={(e) => setName(e.target.value)} placeholder="Customer name" className="h-8 text-sm" />
           </div>
           <div className="space-y-1">
             <Label className="text-xs text-muted-foreground">Email</Label>
-            <Input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email@example.com" className="bg-secondary border-border/50 h-8 text-sm" />
+            <Input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email@example.com" className="h-8 text-sm" />
           </div>
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div className="space-y-1">
             <Label className="text-xs text-muted-foreground">Channel</Label>
             <Select value={channel} onValueChange={setChannel}>
-              <SelectTrigger className="bg-secondary border-border/50 h-8 text-sm"><SelectValue /></SelectTrigger>
+              <SelectTrigger className="h-8 text-sm"><SelectValue /></SelectTrigger>
               <SelectContent>
                 {channels.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
               </SelectContent>
@@ -118,7 +113,7 @@ export function ManualEntryForm() {
           <div className="space-y-1">
             <Label className="text-xs text-muted-foreground">Category</Label>
             <Select value={category} onValueChange={setCategory}>
-              <SelectTrigger className="bg-secondary border-border/50 h-8 text-sm"><SelectValue /></SelectTrigger>
+              <SelectTrigger className="h-8 text-sm"><SelectValue /></SelectTrigger>
               <SelectContent>
                 {categories.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}
               </SelectContent>
@@ -127,13 +122,12 @@ export function ManualEntryForm() {
         </div>
         <div className="space-y-1">
           <Label className="text-xs text-muted-foreground">Feedback</Label>
-          <Textarea value={text} onChange={(e) => setText(e.target.value)} placeholder="Enter customer feedback..." className="bg-secondary border-border/50 text-sm min-h-[80px]" />
+          <Textarea value={text} onChange={(e) => setText(e.target.value)} placeholder="Enter customer feedback..." className="text-sm min-h-[80px]" />
         </div>
-        <Button onClick={handleSubmit} disabled={analyzing} className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+        <Button onClick={handleSubmit} disabled={analyzing} className="w-full">
           {analyzing ? (
             <>
               <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-              <Sparkles className="h-4 w-4 mr-2" />
               Analyzing...
             </>
           ) : (
