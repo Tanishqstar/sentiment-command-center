@@ -9,10 +9,10 @@ interface FeedbackItemProps {
 }
 
 const sentimentBg: Record<string, string> = {
-  Positive: "bg-success/5 border-success/20",
-  Neutral: "border-border/30",
+  Positive: "bg-success/5 border-success/30",
+  Neutral: "border-border",
   Negative: "bg-critical/5 border-critical/20",
-  Critical: "bg-critical/10 border-critical/40",
+  Critical: "bg-critical/8 border-critical/40",
 };
 
 const statusIcon: Record<string, React.ReactNode> = {
@@ -28,9 +28,9 @@ export function FeedbackItem({ item, onClick }: FeedbackItemProps) {
     <button
       onClick={onClick}
       className={cn(
-        "w-full text-left p-4 rounded-lg border transition-all hover:bg-accent/50 cursor-pointer",
-        sentimentBg[item.sentiment_label] || "border-border/30",
-        isCritical && "animate-pulse-critical border-critical/60"
+        "w-full text-left p-4 rounded-lg border transition-colors hover:bg-accent/60 cursor-pointer",
+        sentimentBg[item.sentiment_label] || "border-border",
+        isCritical && "animate-pulse-critical border-critical/50"
       )}
     >
       <div className="flex items-start justify-between gap-3">
@@ -38,19 +38,19 @@ export function FeedbackItem({ item, onClick }: FeedbackItemProps) {
           <div className="flex items-center gap-2 mb-1">
             {isCritical && <AlertOctagon className="h-4 w-4 text-critical flex-shrink-0" />}
             <span className="font-medium text-sm truncate">{item.customer_name}</span>
-            <Badge variant="outline" className="text-[10px] px-1.5 py-0 border-border/50 text-muted-foreground">
+            <Badge variant="outline" className="text-[10px] px-1.5 py-0 text-muted-foreground font-normal">
               {item.source_channel}
             </Badge>
           </div>
           <p className="text-xs text-muted-foreground line-clamp-2 mb-2">{item.ai_summary || item.raw_text}</p>
           <div className="flex items-center gap-2 flex-wrap">
-            <Badge variant="secondary" className="text-[10px] px-1.5 py-0">{item.category}</Badge>
+            <Badge variant="secondary" className="text-[10px] px-1.5 py-0 font-normal">{item.category}</Badge>
             <div className="flex items-center gap-1">
               {statusIcon[item.resolution_status]}
               <span className="text-[10px] text-muted-foreground">{item.resolution_status}</span>
             </div>
             {isCritical && (
-              <Badge className="text-[10px] px-1.5 py-0 bg-critical/20 text-critical border-critical/30">
+              <Badge className="text-[10px] px-1.5 py-0 bg-critical/10 text-critical border-critical/20 hover:bg-critical/15">
                 High Priority
               </Badge>
             )}

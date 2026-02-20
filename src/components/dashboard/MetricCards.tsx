@@ -52,9 +52,9 @@ export function MetricCards({ data }: MetricCardsProps) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
       {metrics.map((m) => (
-        <Card key={m.label} className="glass-card glow-primary border-border/30">
+        <Card key={m.label} className="shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">{m.label}</CardTitle>
+            <CardTitle className="text-xs font-medium text-muted-foreground">{m.label}</CardTitle>
             <div className={`p-2 rounded-lg ${m.bg}`}>
               <m.icon className={`h-4 w-4 ${m.accent}`} />
             </div>
